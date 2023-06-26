@@ -1,4 +1,3 @@
-{{-- test git --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
