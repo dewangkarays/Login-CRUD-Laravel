@@ -48,6 +48,15 @@ rel="stylesheet"
                         <input required type="text" name='nama' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value= "{{ $data->nama }}" >
                       </div>
                       <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Posisi</label>
+                        <select class="form-control select2" style="width:100%;" name="posisi_id" id="posisi_id">
+                          <option disabled value>Pilih Posisi</option>
+                          <option  value="{{ $data->posisi_id}} ">{{ $data->posisi->posisi }}</option>
+                          @foreach ($jab as $row)
+                          <option value="{{ $row->id }}">{{ $row->posisi }}</option>
+                          @endforeach
+                        </select>
+                      <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
                         <input required type="email"  name='email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value= "{{ $data->email }}">
                       </div>
@@ -59,10 +68,38 @@ rel="stylesheet"
                         <label for="exampleInputEmail1" class="form-label">Universitas</label>
                         <input required type="text"  name='universitas' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value= "{{ $data->universitas }}">
                       </div>
-                     
+                      <div>
+                        <img src="{{ asset('fotomagang/'.$data->foto) }}" alt="" style="width: 200px">
+                      </div>
+                      <div class="mb-3">
+                        <label for="foto" class="form-label">Ubah foto</label>
+                        <input type="file"  id="foto" name='foto' class="form-control" >
+                      </div>
+                      <a href="/halamanutama" class="btn btn-warning" " >Kembali</a>
                       <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                   </div>
+                  <br>
+                  
+                  
+                  {{-- <img src="{{ asset('fotomagang/'.$data->foto) }}" alt="" style="width: 200px" --}}
+                  
+
+                  {{-- @foreach ($data as $row)
+                  <tr>
+                    <th scope="row">{{  $row->id }}</th>
+                    <td>{{ $row->nama }}</td>
+                    <td>
+                        <img src="{{ asset('fotomagang/'.$row->foto) }}" alt="" style="width: 100px">
+                    </td>
+                    <td>{{ $row->email }}</td>
+                    <td>{{ $row->semester }}</td>
+                    <td>{{ $row->universitas }}</td>
+                     
+                      
+                      
+                    </tr> 
+                  @endforeach   --}}
                 </div>
                 
               </div>

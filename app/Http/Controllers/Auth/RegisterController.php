@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class RegisterController extends Controller
 {
@@ -40,6 +43,13 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    // public function manageakun()
+    // {
+    //    $data = users::all();
+        
+    //     return view('magang.manageakun',compact('data'));
+    // }
+ 
 
     /**
      * Get a validator for an incoming registration request.
@@ -47,14 +57,37 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+    
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 
+                         Rule::unique('users')->whereNull('deleted_at')  ],
+            // 'required|min:1|unique:versions,name,NULL,id,deleted_at,NULL'
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
+
+    // public function store(Request $request) 
+    // {
+    //     $rules = [
+    //         'email'    => ['required|unique:users,email,NULL,id,deleted_at,NULL'],
+    //         'name' => ['required', 'string', 'max:255'],
+    //         // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         // 'required|min:1|unique:versions,name,NULL,id,deleted_at,NULL'
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //         // Tambahkan aturan validasi lainnya jika diperlukan
+    //     ];
+
+    //     // Membuat instance Validator
+    //     $validator = Validator::make($request->all(), $rules);
+
+    //     // Jalankan validasi
+    //     $validator->validate();
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -63,11 +96,20 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {   
+        $existingUser = User::withTrashed()->where('email', $data['email'])->first();
+        
+        if ($existingUser) {
+            $existingUser->restore();
+            
+            return $existingUser;
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
 }

@@ -47,6 +47,15 @@ rel="stylesheet"
                         <input required type="text" name='nama' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                       </div>
                       <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Posisi</label>
+                        <select class="form-control select2" style="width:100%;" name="posisi_id" id="posisi_id">
+                          <option disabled value>Pilih Posisi</option>
+                          @foreach ($data as $row)
+                          <option value="{{ $row->id }}">{{ $row->posisi }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
                         <input required type="email"  name='email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                       </div>
@@ -60,9 +69,9 @@ rel="stylesheet"
                       </div>
                       <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Masukkan foto</label>
-                        <input required type="file"  name='foto' class="form-control" >
+                        <input  type="file"  name='foto' class="form-control" >
                       </div>
-                     
+                      <a href="/halamanutama" class="btn btn-warning" " >Kembali</a>
                       <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                   </div>
@@ -70,6 +79,10 @@ rel="stylesheet"
                 
               </div>
             </div>
+            {{-- <div class="card-footer">
+              <a href="/halamanutama" class="btn btn-warning" " >Kembali</a>
+
+            </div> --}}
                   
                   {{-- TAMBAH MAHASISWA --}}
             

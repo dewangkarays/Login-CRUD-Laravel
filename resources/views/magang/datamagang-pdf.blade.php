@@ -40,6 +40,8 @@
   <tr>
     <th>No</th>
     <th>Nama</th>
+    <th>Posisi</th>
+    {{-- <th>foto</th> --}}
     <th>Email</th>
     <th>Semester</th>
     <th>Universitas</th>
@@ -51,6 +53,10 @@
   <tr>
     <td>{{ $no++ }}</td>
     <td>{{ $row->nama }}</td>
+    <td>{{ $row->posisi->posisi }}</td>
+    {{-- <td>
+      <img url="{{ asset('fotomagang/'.$row->foto) }}" alt="" style="width: 100px">
+  </td>  --}}
     <td>{{ $row->email }}</td>
     <td>{{ $row->semester }}</td>
     <td>{{ $row->universitas }}</td>

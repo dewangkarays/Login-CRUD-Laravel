@@ -15,7 +15,7 @@ class CreateDaftarMagangsTable extends Migration
     {
         Schema::create('daftar_magangs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
+            $table->string('nama');  
             $table->string('email');
             $table->integer('semester');
             $table->string('universitas');
